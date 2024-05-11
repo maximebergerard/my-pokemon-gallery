@@ -20,32 +20,41 @@ const Stats = ({ stats }: Props) => {
 
   return (
     <div className="flex jutify-center mb-6">
-      <div className="w-full">
-        <div className="items-center mb-2">
-          <p className="mb-1">HP</p>
-          <div className="w-3/4 bg-slate-100 rounded-md">
+      <div className="w-full flex flex-col items-center">
+        <div className="w-4/5 items-center mb-2">
+          <div className="flex justify-between mb-1">
+            <span>HP</span>
+            <span className="text-neutral-500">{stats?.HP}</span>
+          </div>
+          <div className="w-full bg-slate-100 rounded-md">
             <div
-              className="h-2 bg-green-300 rounded-l-md"
+              className="h-2 bg-green-300 rounded-md"
               style={{ width: `${getStatPercentage(stats?.HP, maxStat.HP)}%` }}
             />
           </div>
         </div>
-        <div className="items-center mb-2">
-          <p className="mb-1">Attack</p>
-          <div className="w-3/4 bg-slate-100 rounded-md">
+        <div className="w-4/5 items-center mb-2">
+          <div className="flex justify-between mb-1">
+            <span>Attack</span>
+            <span className="text-neutral-500">{stats?.Attack}</span>
+          </div>
+          <div className="w-full bg-slate-100 rounded-md">
             <div
-              className="h-2 bg-red-300 rounded-l-md"
+              className="h-2 bg-red-300 rounded-md"
               style={{
                 width: `${getStatPercentage(stats?.Attack, maxStat.Attack)}%`,
               }}
             />
           </div>
         </div>
-        <div className="items-center mb-2">
-          <p className="mb-1">Defense</p>
-          <div className="w-3/4 bg-slate-100 rounded-md">
+        <div className="w-4/5 items-center mb-2">
+          <div className="flex justify-between mb-1">
+            <span>Defense</span>
+            <span className="text-neutral-500">{stats?.Defense}</span>
+          </div>
+          <div className="w-full bg-slate-100 rounded-md">
             <div
-              className="h-2 bg-amber-300 rounded-l-md"
+              className="h-2 bg-amber-300 rounded-md"
               style={{
                 width: `${getStatPercentage(stats?.Defense, maxStat.Defense)}%`,
               }}
@@ -53,34 +62,43 @@ const Stats = ({ stats }: Props) => {
           </div>
         </div>
       </div>
-      <div className="w-full">
-        <div className="items-center mb-2">
-          <p className="mb-1">Speed</p>
-          <div className="w-3/4 bg-slate-100 rounded-md">
+      <div className="w-full flex flex-col items-center">
+        <div className="w-4/5 items-center mb-2">
+          <div className="flex justify-between mb-1">
+            <span>Speed</span>
+            <span className="text-neutral-500">{stats?.Speed}</span>
+          </div>
+          <div className="w-full bg-slate-100 rounded-md">
             <div
-              className="h-2 bg-sky-200 rounded-l-md"
+              className="h-2 bg-sky-200 rounded-md"
               style={{
                 width: `${getStatPercentage(stats?.Speed, maxStat.Speed)}%`,
               }}
             />
           </div>
         </div>
-        <div className="items-center mb-2">
-          <p className="mb-1">Sp. Attack</p>
-          <div className="w-3/4 bg-slate-100 rounded-md">
+        <div className="w-4/5 items-center mb-2">
+          <div className="flex justify-between mb-1">
+            <span>Sp. Attack</span>
+            <span className="text-neutral-500">{stats?.["Sp. Attack"]}</span>
+          </div>
+          <div className="w-full bg-slate-100 rounded-md">
             <div
-              className="h-2 bg-red-400 rounded-l-md"
+              className="h-2 bg-red-400 rounded-md"
               style={{
                 width: `${getStatPercentage(stats?.["Sp. Attack"], maxStat["Sp. Attack"])}%`,
               }}
             />
           </div>
         </div>
-        <div className="items-center mb-2">
-          <p className="mb-1">Sp. Defense</p>
-          <div className="w-3/4 bg-slate-100 rounded-md">
+        <div className="w-4/5 items-center mb-2">
+          <div className="flex justify-between mb-1">
+            <span>Sp. Defense</span>
+            <span className="text-neutral-500">{stats?.["Sp. Defense"]}</span>
+          </div>
+          <div className="w-full bg-slate-100 rounded-md">
             <div
-              className="h-2 bg-amber-400 rounded-l-md"
+              className="h-2 bg-amber-400 rounded-md"
               style={{
                 width: `${getStatPercentage(stats?.["Sp. Defense"], maxStat["Sp. Defense"])}%`,
               }}
