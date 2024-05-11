@@ -1,10 +1,15 @@
 import { useEffect } from "react"
 import algoliasearch from "algoliasearch"
-import { InstantSearch, Hits } from "react-instantsearch"
-import type { Hit as AlgoliaHit } from "instantsearch.js"
+import {
+  InstantSearch,
+  RefinementList,
+  SearchBox,
+  Hits,
+  Pagination,
+} from "react-instantsearch"
+import Hit from "./components/Card/Hit"
 
 import formatIndexData from "./utils/formatIndexData"
-import { Pokemon } from "./types/pokemon"
 
 const searchClient = algoliasearch(
   "3O2NY7LK83",
@@ -12,20 +17,6 @@ const searchClient = algoliasearch(
 )
 
 const index = searchClient.initIndex("pokemon_dataset")
-
-type HitProps = {
-  hit: AlgoliaHit<{
-    name: Pokemon["name"]
-  }>
-}
-
-const Hit = ({ hit }: HitProps) => {
-  return (
-    <article>
-      <p>{hit.name?.french}</p>
-    </article>
-  )
-}
 
 const App = () => {
   // Function to
@@ -39,7 +30,47 @@ const App = () => {
   return (
     <>
       <InstantSearch searchClient={searchClient} indexName="pokemon_dataset">
-        <Hits hitComponent={Hit} />
+        <div>
+          <SearchBox
+            placeholder="Pikachu"
+            autoFocus
+            className="max-w-xl mx-auto p-6"
+            resetIconComponent={() => null}
+            submitIconComponent={() => null}
+          />
+          <div className="flex flex-column my-16">
+            <div className="px-4">
+              <RefinementList
+                attribute="game_versions"
+                searchable={true}
+                showMore={true}
+                classNames={{
+                  root: "mb-8",
+                }}
+              />
+              <RefinementList
+                attribute="type"
+                searchable={true}
+                showMore={true}
+              />
+            </div>
+            <div>
+              <Hits
+                hitComponent={Hit}
+                classNames={{
+                  root: "w-full px-8",
+                  list: "grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 grid-flow-row-dense gap-6",
+                  item: "first:rounded-md rounded-md drop-shadow-xl shadow-none",
+                }}
+              />
+              <Pagination
+                classNames={{
+                  root: "mt-8 flex justify-center",
+                }}
+              />
+            </div>
+          </div>
+        </div>
       </InstantSearch>
     </>
   )
