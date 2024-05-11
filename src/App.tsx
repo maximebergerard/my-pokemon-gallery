@@ -10,6 +10,7 @@ import {
 import Hit from "./components/Card/Hit"
 
 import formatIndexData from "./utils/formatIndexData"
+import RangerSlider from "./components/RangeSlider"
 
 const searchClient = algoliasearch(
   "3O2NY7LK83",
@@ -40,6 +41,7 @@ const App = () => {
           />
           <div className="flex flex-column my-16">
             <div className="px-4">
+              <RangerSlider attribute="base.HP" min={1} max={255} />
               <RefinementList
                 attribute="game_versions"
                 searchable={true}
@@ -59,7 +61,7 @@ const App = () => {
                 hitComponent={Hit}
                 classNames={{
                   root: "w-full px-8",
-                  list: "grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 grid-flow-row-dense gap-6",
+                  list: "grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 grid-flow-row-dense gap-6",
                   item: "first:rounded-md rounded-md drop-shadow-xl shadow-none",
                 }}
               />
