@@ -1,6 +1,9 @@
 import type { Hit as AlgoliaHit } from "instantsearch.js"
 import { Pokemon } from "../../types/pokemon"
-import { pokemonBackgroundTypeColors } from "../../utils/pokemonColors"
+import {
+  pokemonBackgroundTypeColors,
+  pokemonBorderTypeColors,
+} from "../../utils/pokemonColors"
 import Stats from "./Stats"
 import { useContext, useEffect, useState } from "react"
 import LanguageContext, {
@@ -25,12 +28,16 @@ const Hit = ({ hit }: HitProps) => {
     setDisplayName(getLanguageString(language, hit.name))
   }, [language, hit.name])
   return (
-    <article className="w-full">
+    <article
+      className={`w-full p-2 pb-4 md:p-6 bg-white rounded-md shadow-none transition ease-in hover:-translate-y-3 group ${getTypeColor(hit.type?.[0], "border")}  border-2`}
+    >
       <div className="flex justify-between items-center">
         <span className="text-blue-900 text-xl text-center font-semibold">
           {displayName}
         </span>
-        <span className="font-medium">{formatPokemonId(hit.id)}</span>
+        <span className="font-medium text-neutral-400">
+          {formatPokemonId(hit.id)}
+        </span>
       </div>
       <div className="p-2">
         <img src={hit.image} className="w-3/4 md:w-3/4 m-auto my-4" />
@@ -42,7 +49,7 @@ const Hit = ({ hit }: HitProps) => {
         {hit.type?.map((type, index) => {
           return (
             <span
-              className={`mr-2 ${getTypeColor(type)} text-white text-xs font-medium px-4 py-1 rounded-full`}
+              className={`mr-2 ${getTypeColor(type, "bg")} text-white text-xs font-medium px-4 py-1 rounded-full`}
               key={index}
             >
               {type.toLocaleUpperCase()}
@@ -56,12 +63,18 @@ const Hit = ({ hit }: HitProps) => {
 
 export default Hit
 
-function getTypeColor(type: string) {
-  const typeColor = pokemonBackgroundTypeColors[type.toLowerCase()]
-
-  return typeColor ? typeColor : "gray" // Return a default color if the type is not found
+function getTypeColor(type: string = "normal", property: "bg" | "border") {
+  switch (property) {
+    case "border":
+      return pokemonBorderTypeColors[type.toLowerCase()]
+    case "bg":
+      return pokemonBackgroundTypeColors[type.toLowerCase()]
+    default:
+      return "grey"
+  }
 }
 
+// Format id like this #001 #010 #100
 function formatPokemonId(id: number): string {
   const idString = id.toString()
   if (id >= 1 && id <= 9) {

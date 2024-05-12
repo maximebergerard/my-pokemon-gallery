@@ -24,10 +24,9 @@ const App = () => {
   const [isOpen, setIsOpen] = useState(true)
 
   useEffect(() => {
-    // This function retrieve data
-    // from pokéAPI and algolia index using browseObjects
-    // it mix and format data
-    // and it update the index objects using partialUpdateObjects
+    // This function retrieve data from pokéAPI and algolia index using browseObjects
+    // It mix and format data
+    // And it update the index objects using partialUpdateObjects
     formatIndexData(index, false)
   })
 
@@ -35,16 +34,15 @@ const App = () => {
     <>
       <InstantSearch searchClient={searchClient} indexName="pokemon_dataset">
         <div>
-          <div className="flex mt-10 mx-8 md:items-center flex-col md:flex-row">
-            <h1 className="text-4xl font-bold mb-4 md:mb-0 md:mr-20">
-              My Poké <br />
-              Gallery
-            </h1>
-            <SearchBox
-              placeholder="Pikachu"
-              autoFocus
-              className="flex-1 md:mr-40 mb-4 md:mb-0 w-full"
-            />
+          <div className="flex justify-center mt-10 mx-8 md:items-end flex-col md:flex-row">
+            <div className="flex flex-col w-full md:w-1/2 md:ml-16 mr-8">
+              <h1 className="text-4xl font-bold mb-4">My Poké Gallery</h1>
+              <SearchBox
+                placeholder="Pikachu"
+                autoFocus
+                className="flex-1 w-full mb-4 md:mb-0"
+              />
+            </div>
             <LanguageDropdown />
           </div>
           <div className="flex flex-column my-10">
@@ -114,10 +112,11 @@ const App = () => {
                 classNames={{
                   root: "w-3/4 w-full px-4 md:px-8",
                   list: "grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 grid-flow-row-dense gap-2 md:gap-6",
-                  item: "first:rounded-md rounded-md drop-shadow-xl shadow-none p-2 pb-4 md:p-6",
+                  item: "first:rounded-md rounded-md drop-shadow-xl shadow-none p-0 bg-transparent",
                 }}
               />
               <Pagination
+                totalPages={5}
                 classNames={{
                   root: "mt-8 flex justify-center",
                 }}

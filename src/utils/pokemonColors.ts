@@ -22,3 +22,24 @@ export const pokemonBackgroundTypeColors: PokemonColors = {
   steel: "bg-silver-600",
   fairy: "bg-pink-600",
 }
+
+export const pokemonBorderTypeColors: PokemonColors = {
+  normal: "border-gray-100",
+  fire: "border-red-100",
+  water: "border-blue-100",
+  electric: "border-yellow-100",
+  grass: "border-green-100",
+  ice: "border-cyan-100",
+  fighting: "border-brown-100",
+  poison: "border-purple-100",
+  ground: "border-orange-100",
+  flying: "border-sky-100",
+  psychic: "border-pink-100",
+  bug: "border-lime-100",
+  rock: "border-gray-200",
+  ghost: "border-zinc-100",
+  dragon: "border-indigo-100",
+  dark: "border-stone-300",
+  steel: "border-silver-100",
+  fairy: "border-pink-100",
+}
