@@ -1,30 +1,36 @@
-# React + TypeScript + Vite
+# Pokémon Search Experience with Algolia
+---
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
+- [x] Upload the data to Algolia Application and create an index
+- [x] Enrich the dataset using the PokéAPI - `formatIndexData.ts`
+- [x] Ensure the final record in the Algolia dashboard matches the expected format :
+```
+{
+  "id": 15,
+  "name": {
+    "english": "Beedrill",
+    "japanese": "スピアー",
+    "chinese": "大针蜂",
+    "french": "Dardargnan"
   },
+  "type": ["Bug", "Poison"],
+  "base": {
+    "HP": 65,
+    "Attack": 90,
+    "Defense": 40,
+    "Sp. Attack": 45,
+    "Sp. Defense": 80,
+    "Speed": 75
+  },
+  "game_versions": ["Red", "Blue", "Yellow", "Gold", "Silver", "Crystal"],
+  "imageUrl": "https://example.com/beedrill-image.png"
 }
 ```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+- [x] Implement Algolia search in your application using the InstantSearch library
+- [x] Create a searchbar to initiate searches
+- [x] Display dynamic search results, showing each Pokémon's image, name, type, and stats
+- [x] Implement filters using instant search custom widget for Pokémon type, game versions, and at least one stat (using a range slider)
+- [x] Implement a dropdown to switch the display language of Pokémon names (English, Japanese, Chinese, and French)
+- [x] Use local storage or any state manager with persistent services to save the user’s language preference across page reloads
+- [ ] Handle the no result page
+- [ ] Add a dark mode 
