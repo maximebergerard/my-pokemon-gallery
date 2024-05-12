@@ -25,7 +25,7 @@ const Hit = ({ hit }: HitProps) => {
     setDisplayName(getLanguageString(language, hit.name))
   }, [language, hit.name])
   return (
-    <article>
+    <article className="w-full">
       <div className="flex justify-between items-center">
         <span className="text-blue-900 text-xl text-center font-semibold">
           {displayName}
@@ -33,7 +33,7 @@ const Hit = ({ hit }: HitProps) => {
         <span className="font-medium">{formatPokemonId(hit.id)}</span>
       </div>
       <div className="p-2">
-        <img src={hit.image} className="w-3/4 m-auto my-4" />
+        <img src={hit.image} className="w-3/4 md:w-3/4 m-auto my-4" />
       </div>
       <div>
         <Stats stats={hit.base} />

@@ -17,7 +17,7 @@ const LanguageDropdown = () => {
 
   return (
     <select
-      className="text-white h-10 bg-blue-700 hover:bg-blue-800 focus:outline-none font-medium rounded-lg text-sm px-3 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700"
+      className="text-white cursor-pointer h-10 bg-blue-800 hover:bg-blue-900 focus:outline-none font-medium rounded-lg text-sm px-3 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700"
       value={language}
       onChange={handleLanguageChange}
     >

@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import algoliasearch from "algoliasearch"
 import {
   InstantSearch,
@@ -21,6 +21,8 @@ const searchClient = algoliasearch(
 const index = searchClient.initIndex("pokemon_dataset")
 
 const App = () => {
+  const [isOpen, setIsOpen] = useState(true)
+
   useEffect(() => {
     // This function retrieve data
     // from pokéAPI and algolia index using browseObjects
@@ -33,52 +35,86 @@ const App = () => {
     <>
       <InstantSearch searchClient={searchClient} indexName="pokemon_dataset">
         <div>
-          <div className="flex mt-10 mx-8 items-center">
-            <h1 className="text-4xl font-bold mr-20">
+          <div className="flex mt-10 mx-8 md:items-center flex-col md:flex-row">
+            <h1 className="text-4xl font-bold mb-4 md:mb-0 md:mr-20">
               My Poké <br />
               Gallery
             </h1>
             <SearchBox
               placeholder="Pikachu"
               autoFocus
-              className="flex-1 mr-40"
+              className="flex-1 md:mr-40 mb-4 md:mb-0 w-full"
             />
             <LanguageDropdown />
           </div>
           <div className="flex flex-column my-10">
-            <div className="px-4">
-              <RangerSlider attribute="base.HP" min={1} max={255} />
-              <div>
-                <p className="mb-2 text-lg font-medium text-blue-700">Type</p>
-                <RefinementList
-                  attribute="type"
-                  searchable={true}
-                  searchablePlaceholder="Electric"
-                  showMore={true}
-                  classNames={{
-                    root: "mb-8",
-                  }}
-                />
+            {isOpen ? (
+              <div className="drop-shadow-md md:relative absolute z-20">
+                <div className="px-8 py-4 bg-white rounded-r-md relative h-fit">
+                  <div
+                    className="cursor-pointer"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <div className="w-6 h-10 absolute right-0 z-10">
+                      <div className="absolute bg-blue-600 w-3 h-3 rotate-45" />
+                      <div className="absolute bg-white w-3 h-3 rotate-45 translate-x-1" />
+                    </div>
+                    <div className="w-6 h-10 absolute right-2 z-0">
+                      <div className="absolute bg-blue-600 w-3 h-3 rotate-45" />
+                      <div className="absolute bg-white w-3 h-3 rotate-45 translate-x-1" />
+                    </div>
+                  </div>
+                  <RangerSlider attribute="base.HP" min={1} max={255} />
+                  <div>
+                    <p className="mb-2 text-lg font-medium text-blue-700">
+                      Type
+                    </p>
+                    <RefinementList
+                      attribute="type"
+                      searchable={true}
+                      searchablePlaceholder="Electric"
+                      showMore={true}
+                      classNames={{
+                        root: "mb-8",
+                        showMore: "h-8 w-full border-indigo-50",
+                      }}
+                    />
+                  </div>
+                  <div>
+                    <p className="mb-2 text-lg font-medium text-blue-700">
+                      Game version
+                    </p>
+                    <RefinementList
+                      attribute="game_versions"
+                      searchable={true}
+                      searchablePlaceholder="Yellow"
+                      showMore={true}
+                      classNames={{
+                        showMore: "h-8 w-full border-indigo-50",
+                      }}
+                    />
+                  </div>
+                </div>
               </div>
-              <div>
-                <p className="mb-2 text-lg font-medium text-blue-700">
-                  Game version
-                </p>
-                <RefinementList
-                  attribute="game_versions"
-                  searchable={true}
-                  searchablePlaceholder="Yellow"
-                  showMore={true}
-                />
+            ) : (
+              <div
+                className="flex justify-center items-center w-8 md:w-16 h-10 bg-white rounded-r-lg md:relative fixed z-20 drop-shadow-md"
+                onClick={() => setIsOpen(true)}
+              >
+                <div className="cursor-pointer">
+                  <div className="w-5 h-1 bg-blue-700 rounded-md " />
+                  <div className="mt-1 w-5 h-1 bg-blue-700 rounded-md" />
+                  <div className="mt-1 w-5 h-1 bg-blue-700 rounded-md" />
+                </div>
               </div>
-            </div>
-            <div>
+            )}
+            <div className="w-full">
               <Hits
                 hitComponent={Hit}
                 classNames={{
-                  root: "w-full px-8",
-                  list: "grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 grid-flow-row-dense gap-6",
-                  item: "first:rounded-md rounded-md drop-shadow-xl shadow-none",
+                  root: "w-3/4 w-full px-4 md:px-8",
+                  list: "grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 grid-flow-row-dense gap-2 md:gap-6",
+                  item: "first:rounded-md rounded-md drop-shadow-xl shadow-none p-2 pb-4 md:p-6",
                 }}
               />
               <Pagination
