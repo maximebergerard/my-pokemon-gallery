@@ -1,5 +1,25 @@
 # Pokémon Search Experience with Algolia
----
+
+## 🛠️ Getting Started
+Clone down this repository. You will need node.js and git installed globally on your machine.
+
+1. Installation: ` npm install `
+2. In the project directory, you can run: `npm run dev`
+Open http://localhost:5173/ to view it in the browser.
+
+## 👷‍♂️ Build with
+- React.js
+- TypeScript
+- Tailwind CSS
+- Algolia instant search
+- Vite
+
+## Features 
+🔎 The searchable attributes in the search bar are the type, the name, the id and the game versions of the Pokémon.
+🇫🇷🇨🇳🏴󠁧󠁢󠁥󠁮󠁧󠁿🇯🇵 On the right of the search bar there is a select button, you can chose in which language you wish to display Pokémons' name.
+🎯 Filters are in the left sidebar, you can sort by type, game versions and Heal Point of the Pokémon. 
+
+## To-do
 
 - [x] Upload the data to Algolia Application and create an index
 - [x] Enrich the dataset using the PokéAPI - `formatIndexData.ts`
@@ -33,4 +53,5 @@
 - [x] Implement a dropdown to switch the display language of Pokémon names (English, Japanese, Chinese, and French)
 - [x] Use local storage or any state manager with persistent services to save the user’s language preference across page reloads
 - [ ] Handle the no result page
+- [ ] Lazy load pokemon images
 - [ ] Add a dark mode 
