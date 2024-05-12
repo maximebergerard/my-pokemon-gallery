@@ -10,7 +10,8 @@ import {
 import Hit from "./components/Card/Hit"
 
 import formatIndexData from "./utils/formatIndexData"
-import RangerSlider from "./components/RangeSlider"
+import RangerSlider from "./components/RangeSlider/RangeSlider"
+import LanguageDropdown from "./components/LanguageDropdown/LanguageDropdown"
 
 const searchClient = algoliasearch(
   "3O2NY7LK83",
@@ -20,11 +21,11 @@ const searchClient = algoliasearch(
 const index = searchClient.initIndex("pokemon_dataset")
 
 const App = () => {
-  // Function to
-  // Retrieve data from pokéAPI and algolia index using browseObjects
-  // Mix and format data
-  // Update index objects using partialUpdateObjects
   useEffect(() => {
+    // This function retrieve data
+    // from pokéAPI and algolia index using browseObjects
+    // it mix and format data
+    // and it update the index objects using partialUpdateObjects
     formatIndexData(index, false)
   })
 
@@ -32,29 +33,44 @@ const App = () => {
     <>
       <InstantSearch searchClient={searchClient} indexName="pokemon_dataset">
         <div>
-          <SearchBox
-            placeholder="Pikachu"
-            autoFocus
-            className="max-w-xl mx-auto p-6"
-            resetIconComponent={() => null}
-            submitIconComponent={() => null}
-          />
-          <div className="flex flex-column my-16">
+          <div className="flex mt-10 mx-8 items-center">
+            <h1 className="text-4xl font-bold mr-20">
+              My Poké <br />
+              Gallery
+            </h1>
+            <SearchBox
+              placeholder="Pikachu"
+              autoFocus
+              className="flex-1 mr-40"
+            />
+            <LanguageDropdown />
+          </div>
+          <div className="flex flex-column my-10">
             <div className="px-4">
               <RangerSlider attribute="base.HP" min={1} max={255} />
-              <RefinementList
-                attribute="game_versions"
-                searchable={true}
-                showMore={true}
-                classNames={{
-                  root: "mb-8",
-                }}
-              />
-              <RefinementList
-                attribute="type"
-                searchable={true}
-                showMore={true}
-              />
+              <div>
+                <p className="mb-2 text-lg font-medium text-blue-700">Type</p>
+                <RefinementList
+                  attribute="type"
+                  searchable={true}
+                  searchablePlaceholder="Electric"
+                  showMore={true}
+                  classNames={{
+                    root: "mb-8",
+                  }}
+                />
+              </div>
+              <div>
+                <p className="mb-2 text-lg font-medium text-blue-700">
+                  Game version
+                </p>
+                <RefinementList
+                  attribute="game_versions"
+                  searchable={true}
+                  searchablePlaceholder="Yellow"
+                  showMore={true}
+                />
+              </div>
             </div>
             <div>
               <Hits
