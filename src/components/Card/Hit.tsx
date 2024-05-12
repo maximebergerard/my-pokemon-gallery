@@ -2,6 +2,10 @@ import type { Hit as AlgoliaHit } from "instantsearch.js"
 import { Pokemon } from "../../types/pokemon"
 import { pokemonBackgroundTypeColors } from "../../utils/pokemonColors"
 import Stats from "./Stats"
+import { useContext, useEffect, useState } from "react"
+import LanguageContext, {
+  LanguageContextProps,
+} from "../../contexts/LanguageContext"
 
 type HitProps = {
   hit: AlgoliaHit<{
@@ -14,11 +18,17 @@ type HitProps = {
 }
 
 const Hit = ({ hit }: HitProps) => {
+  const { language } = useContext(LanguageContext) as LanguageContextProps
+  const [displayName, setDisplayName] = useState<string>("")
+
+  useEffect(() => {
+    setDisplayName(getLanguageString(language, hit.name))
+  }, [language, hit.name])
   return (
     <article>
       <div className="flex justify-between items-center">
         <span className="text-blue-900 text-xl text-center font-semibold">
-          {hit.name?.french ? hit.name?.french : hit.name?.english}
+          {displayName}
         </span>
         <span className="font-medium">{formatPokemonId(hit.id)}</span>
       </div>
@@ -62,5 +72,20 @@ function formatPokemonId(id: number): string {
     return `#${idString}`
   } else {
     throw new Error("Invalid Pokémon ID")
+  }
+}
+
+function getLanguageString(language: string, name: Pokemon["name"]): string {
+  switch (language) {
+    case "en":
+      return name?.english ?? "Unknown"
+    case "ja":
+      return name?.japanese ?? "Unknown"
+    case "zh":
+      return name?.chinese ?? "Unknown"
+    case "fr":
+      return name?.french ?? "Unknown"
+    default:
+      return "Unknown"
   }
 }
