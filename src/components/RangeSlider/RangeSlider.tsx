@@ -17,7 +17,10 @@ const RangerSlider = (props: UseRangeProps) => {
 
   const { min, max } = range
 
-  const [value, setValue] = useState({ start: props.min, end: props.max })
+  const [value, setValue] = useState({
+    start: props.min || 1,
+    end: props.max || 100,
+  })
 
   const from = Math.max(
     min as number,
